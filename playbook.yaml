@@ -1,0 +1,30 @@
+---
+- hosts: loadbalancers
+#remote_user: root
+         tasks:
+        # name : intalar nginx
+        #yum: name=nginx  state=latest
+                - name: install haproxy
+                yum: 
+                        name: haproxy 
+                        state: latest
+    
+    # tags: haproxy
+
+                - name: configure haproxy
+                template: 
+                        src: haproxy.cfg.j2 
+                        dest: /etc/haproxy/haproxy.cfg
+    #notify: reload haproxy
+    #tags: haproxy
+
+                - name: start haproxy
+                service: 
+                        name: haproxy 
+                        state: running
+    #tags: haprox
+
+
+#name: restart haproxy
+#   service: name=haproxy state=restarted
+

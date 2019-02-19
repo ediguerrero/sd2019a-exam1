@@ -19,4 +19,6 @@ config.vm.define "load_balancer" do |lb_config|
         lb_config.vm.network "forwarded_port", guest: 80, host: 8011
 
 end
+
+
 end

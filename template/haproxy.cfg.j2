@@ -68,4 +68,4 @@ backend app-main
     balance roundrobin                                     #Balance algorithm
     option httpchk HEAD / HTTP/1.1\r\nHost:\ localhost    #Check the server application is up and healty - 200 status code
     server nginx1 10.0.15.21:80 check                 #Nginx1 
-    server nginx2 10.0.15.21:80 check                 #Nginx2
+    server nginx2 10.0.15.22:80 check                 #Nginx2

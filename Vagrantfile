@@ -1,26 +1,63 @@
+# Defines our Vagrant environment
+
+#
+
+# -*- mode: ruby -*-
+
+# vi: set ft=ruby :
+
 
 Vagrant.configure("2") do |config|
-#config.vm.define "web1" do |node|
-    #    node.vm.box = "centos_7"
-   #     node.vm.hostname = "web1"
-  #      node.vm.network :private_network, ip: "10.0.15.21"
- #       node.vm.network "forwarded_port", guest: 80, host: "8081"
-#end
-#config.vm.define "web2" do |node|
-    #    node.vm.box = "centos_7"
-   #     node.vm.hostname = "web2"
-  #      node.vm.network :private_network, ip: "10.0.15.22"
- #       node.vm.network "forwarded_port", guest: 80, host: "8082"
-#end
-config.vm.define "load_balancer" do |lb_config|
-        lb_config.vm.box = "centos_7"
-        lb_config.vm.hostname = "lb"
-        lb_config.vm.network :private_network, ip: "10.0.15.11"
-        lb_config.vm.network "forwarded_port", guest: 80, host: 8011
-lb_config.vm.provision "ansible" do |ansible|
+
+
+  # create load balancer
+
+  config.vm.define :lb do |lb_config|
+      lb_config.vm.box = "centos_7"
+      lb_config.vm.hostname = "lb"
+      lb_config.vm.network :private_network, ip: "10.0.15.11"
+      lb_config.vm.network "forwarded_port", guest: 80, host: 8080
+      lb_config.vm.provider "virtualbox" do |vb|
+        vb.memory = "256"
+      end
+lb_config.vm.provision "shell",path: "keys.sh"
+
+
+  end
+
+  # create some web servers
+
+  config.vm.define :web1 do |w1_conf|
+        w1_conf.vm.box = "centos_7"
+        w1_conf.vm.hostname = "web1"
+        w1_conf.vm.network :private_network, ip: "10.0.15.21"
+        w1_conf.vm.network "forwarded_port", guest: 80, host: "8081"
+        w1_conf.vm.provider "virtualbox" do |vb|
+          vb.memory = "256"
+       
+ end
+w1_conf.vm.provision "shell",path: "keys.sh"    
+  end
+
+ config.vm.define :web2 do |w2_conf|
+        w2_conf.vm.box = "centos_7"
+        w2_conf.vm.hostname = "web2"
+        w2_conf.vm.network :private_network, ip: "10.0.15.22"
+        w2_conf.vm.network "forwarded_port", guest: 80, host: "8082"
+        w2_conf.vm.provider "virtualbox" do |vb|
+          vb.memory = "256"
+ w2_conf.vm.provision "shell",path: "keys.sh"       
+    end
+  end
+
+
+
+
+config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook.yaml"
-end  
-end
+  end
+
+
 
 
 end

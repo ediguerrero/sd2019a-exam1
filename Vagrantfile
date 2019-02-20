@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
       lb_config.vm.provider "virtualbox" do |vb|
         vb.memory = "256"
       end
-lb_config.vm.provision "shell",path: "keys.sh"
+#lb_config.vm.provision "shell",path: "keys.sh"
 
 
   end
@@ -36,7 +36,7 @@ lb_config.vm.provision "shell",path: "keys.sh"
           vb.memory = "256"
        
  end
-w1_conf.vm.provision "shell",path: "keys.sh"    
+#w1_conf.vm.provision "shell",path: "keys.sh"    
   end
 
  config.vm.define :web2 do |w2_conf|
@@ -46,7 +46,7 @@ w1_conf.vm.provision "shell",path: "keys.sh"
         w2_conf.vm.network "forwarded_port", guest: 80, host: "8082"
         w2_conf.vm.provider "virtualbox" do |vb|
           vb.memory = "256"
- w2_conf.vm.provision "shell",path: "keys.sh"       
+ #w2_conf.vm.provision "shell",path: "keys.sh"       
     end
   end
 
@@ -56,8 +56,5 @@ w1_conf.vm.provision "shell",path: "keys.sh"
 config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook.yaml"
   end
-
-
-
 
 end

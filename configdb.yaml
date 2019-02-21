@@ -1,0 +1,17 @@
+---
+- hosts: db
+  sudo: yes
+  gather_facts: no
+ 
+
+  tasks:
+
+  - name: install mysql
+    yum: name=mysql state=installed update_cache=yes
+
+  - name: start mysql
+    service: name=mysql state=started
+
+  handlers:
+  - name: start mysql
+    service: name=mysql state=restarted  

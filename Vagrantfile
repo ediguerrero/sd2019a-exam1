@@ -67,7 +67,7 @@ config.vm.define :db do |db_conf|
 
 
 config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "playbook.yaml"
+    ansible.playbook = "php.yaml"
   end
 
 end

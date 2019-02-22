@@ -1,0 +1,29 @@
+---
+- hosts: web1
+  sudo: yes
+  gather_facts: no
+
+
+  tasks:
+
+  - name: epel-release
+    yum: name=epel-release state=installed
+
+  - name: Add repository 'remi-repo'
+    command: rpm -ih http://rpms.famillecollet.com/enterprise/remi-release-7.rpm creates=/etc/yum.repos.d/remi.repo
+
+  - name: install php70
+    yum: name={{ item }} enablerepo=epel,remi,remi-php70 state=installed
+    with_items:
+      - php70
+      - php70-php-mcrypt
+      - php70-php-mbstring
+      - php70-php-fpm
+      - php70-php-gd
+      - php70-php-xml
+      - php70-php-pdo
+      - php70-php-zip
+
+  - name : link env file
+    command: ln -s /opt/remi/php70/enable /etc/profile.d/php70.sh creates=/etc/profile.d/php70.sh
+

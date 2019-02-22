@@ -1,17 +1,40 @@
 ---
-- hosts: db
+- name: Instalacion paquetes para MySQL
+  hosts: db
+  vars: root_db_password: Newpassw%rd1
   sudo: yes
   gather_facts: no
  
 
   tasks:
 
-  - name: install mysql
-    yum: name=mysql state=installed update_cache=yes
+  - name: Download MySQL
+    get_url:
+       url:http://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm
+    dest: /tmp
 
-  - name: start mysql
-    service: name=mysql state=started
+  - name: Install MySQL Server  
+    yum: name=mysql-server state=present
 
-  handlers:
-  - name: start mysql
-    service: name=mysql state=restarted  
+  - name: Install MySQL-python, requerido para eliminar usuarios anonimos
+    yum: name=MySQL-python state=present  
+
+  - name: start MySQL Server
+    service: name=mysqld state=started enable=yes
+
+  - name: Remover el Test database si existe
+    mysql_db: name=test state=absent
+
+  - name: Remover todos los usuarios anonimos
+    mysql_user: name='' host_all=yes state=absent
+
+  - name: salida del ansible_hostname
+    debug: msg=”Hostname is {{ansible_hostname}}”
+
+  - name: cambiar root password
+    mysql_user: name=root host={{item}} password={{root_db_password}}
+    with_items:
+       – “{{ansible_hostname}}”
+       – 127.0.0.1
+       – ::1
+       – localhost  

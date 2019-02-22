@@ -36,38 +36,11 @@
   - name: install nginx
     yum: name=nginx state=installed disable_gpg_check=yes validate_certs=no skip_broken=yes
 
-  - name: install php
-    yum: name=php-fpm  state=installed update_cache=yes
-    notify: restart nginx
- 
-  - name: write our default.conf
-    template: src=template/default.conf dest=/etc/nginx/conf.d/ mode=644 owner=root group=root
- 
-  - name: write our php
-    template: src=template/info.php dest=/usr/share/nginx/html/ mode=644 owner=root group=root
-    notify: restart nginx
-  
-  - name: write our php-fpm.conf
-    template: src=template/php-fpm.conf dest=/etc/nginx/default.d/ mode=644 owner=root group=root
-    notify: restart nginx
-
   - name: write our index
     template: src=template/index.html dest=/usr/share/nginx/html/ mode=644 owner=root group=root
     notify: restart nginx
+      
 
-  
-  - name: start php-fpm
-    service: name=php-fpm state=started
-    notify: restart nginx
-    #- name: install php-cli 
-    # yum: name=php-cli  state=installed update_cache=yes
-  
-    # - name: install php-mysql
-    #yum: name=php-mysql  state=installed update_cache=yes
-    # notify: restart nginx
-    #- name: write our phpconfig
-    #template: src=template/configphp dest=/etc/nginx/sites-available/default mode=644 owner=root group=root
-    #    notify: restart nginx
   handlers:
 
   - name: start nginx

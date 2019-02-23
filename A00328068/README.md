@@ -40,7 +40,6 @@ solo hay que reemplasarlo y es todo
 ![][1]
 
 
-
 #problemas
 cuando damos vagrant up todo funciona perfectamente, pero tuvimos un pequeño error que se nos fue imposible corregir, fue la conexion entre la base de datos y los 
 diferentes web servers. Intentamos con varias herramientas tales como php, nodojs, pero debido a diferentes dependencias y a la falta de tiempo 
@@ -52,9 +51,14 @@ al final vemos como el load balancer permite por una unica ip acceder a los dos 
 ![][2]
 ![][3]
 
-[1]:images/1.PNG
-[2]:images/2.PNG
-[3]:images/3.PNG
+
+
+
+
+
+[1]:images/1.png
+[2]:images/2.png
+[3]:images/3.png
 
 
 

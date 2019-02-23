@@ -52,5 +52,9 @@ al final vemos como el load balancer permite por una unica ip acceder a los dos 
 ![][2]
 ![][3]
 
+[1]:images/1.PNG
+[2]:images/2.PNG
+[3]:images/3.PNG
+
 
 

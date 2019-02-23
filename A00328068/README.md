@@ -45,7 +45,7 @@ cuando damos vagrant up todo funciona perfectamente, pero tuvimos un pequeño er
 diferentes web servers. Intentamos con varias herramientas tales como php, nodojs, pero debido a diferentes dependencias y a la falta de tiempo 
 no pudimos realizar esta funcionalidad.Apesar que la maquina db tiene la base de datos, por el momento no se accede a ella
 
-#como luce 
+# como luce 
 al final vemos como el load balancer permite por una unica ip acceder a los dos servidores web sin problema.
 
 ![][2]

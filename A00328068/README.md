@@ -1,6 +1,7 @@
 # Parcial 1
 
 ### **Nombres:** edisson guerrero, julian nino, jonatan
+### **Códigos**  A00328068, 
 ### **Curso:** sistemas distribuidos
 
 # Descripción
